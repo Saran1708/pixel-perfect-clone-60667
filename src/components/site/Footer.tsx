@@ -1,74 +1,55 @@
-import { Zap, Check } from "lucide-react";
+import { Phone, MessageCircle, MapPin } from "lucide-react";
+import logo from "@/assets/edzup-logo.png";
 
 export function Footer() {
   return (
-    <footer className="px-4 pb-10">
+    <footer className="px-4 pb-10 pt-8">
       <div className="mx-auto max-w-6xl">
-        {/* Newsletter */}
-        <div className="relative overflow-hidden rounded-3xl bg-black px-8 py-14 md:px-14 md:py-20 text-white">
-          <div className="absolute inset-0 bg-grid-dark" aria-hidden />
-          <div className="relative grid gap-10 md:grid-cols-2 md:items-center">
-            <div>
-              <h3 className="text-3xl md:text-5xl font-black leading-tight">
-                Subscribe Our Newsletter for latest Updates
-              </h3>
-              <div className="mt-8 flex flex-wrap gap-6 text-sm">
-                <span className="flex items-center gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-black"><Check className="h-3 w-3" /></span>
-                  Daily design update
-                </span>
-                <span className="flex items-center gap-2">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-black"><Check className="h-3 w-3" /></span>
-                  Affiliate earning opportunity
-                </span>
-              </div>
-            </div>
-            <form className="flex flex-col gap-4">
-              <input
-                type="email"
-                placeholder="ENTER YOU EMAIL"
-                className="w-full rounded-full bg-transparent border border-white/20 px-7 py-4 text-sm tracking-wide placeholder:text-white/60 focus:outline-none focus:border-white/60"
-              />
-              <button className="rounded-full bg-white py-4 text-sm font-bold text-black tracking-wide hover:bg-white/90">
-                SUBSCRIBE NOW
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {/* Footer columns */}
-        <div className="mt-16 grid gap-12 md:grid-cols-4">
+        <div className="grid gap-10 md:grid-cols-4">
           <div>
-            <div className="flex items-center gap-3">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-black text-white">
-                <Zap className="h-5 w-5 fill-white" strokeWidth={0} />
-              </span>
-              <span className="text-3xl font-black">Tutorly</span>
-            </div>
-            <p className="mt-5 text-muted-foreground max-w-xs">
-              A modern, business-ready online learning platform template built for course creators, academies, and educators
+            <img src={logo} alt="EDZUP" className="h-9 w-auto" />
+            <p className="mt-4 text-[13px] text-muted-foreground max-w-xs leading-relaxed">
+              Coimbatore-based educational consultancy providing 100% free guidance to +2 students for college and course selection.
             </p>
           </div>
-          <FooterCol title="Quick Link" items={["Home", "About us", "Courses", "Contact us"]} />
-          <FooterCol title="Company" items={["Blog", "Blog details", "Courses details", "Mentor details"]} />
-          <FooterCol title="Others" items={["Signup", "Login", "Style Guide", "Changelog"]} />
+          <FooterCol title="Explore" items={[
+            { l: "Home", h: "#home" },
+            { l: "About", h: "#about" },
+            { l: "Services", h: "#services" },
+            { l: "Colleges", h: "#colleges" },
+            { l: "Contact", h: "#contact" },
+          ]} />
+          <FooterCol title="Apply" items={[
+            { l: "Admission Enquiry", h: "/enquiry" },
+            { l: "Engineering Colleges", h: "#colleges" },
+            { l: "Arts & Science", h: "#colleges" },
+            { l: "7.5% Category", h: "#services" },
+          ]} />
+          <div>
+            <h4 className="text-[15px] font-semibold">Reach us</h4>
+            <ul className="mt-4 space-y-3 text-[13px] text-muted-foreground">
+              <li className="flex items-center gap-2"><Phone className="h-3.5 w-3.5 text-accent2" /> <a href="tel:9994538133" className="hover:text-foreground">9994538133</a></li>
+              <li className="flex items-center gap-2"><MessageCircle className="h-3.5 w-3.5 text-accent2" /> <a href="https://wa.me/919994538133" className="hover:text-foreground">WhatsApp Dharani K.K.</a></li>
+              <li className="flex gap-2"><MapPin className="h-3.5 w-3.5 text-accent2 mt-0.5 shrink-0" /> Stark Tower, Kamaraj Nagar, East Zone, Kaalapatti Road, Coimbatore – 641014</li>
+            </ul>
+          </div>
         </div>
-
-        <div className="mt-12 border-t pt-6 text-center text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Tutorly. All rights reserved.
+        <div className="mt-12 border-t pt-6 flex flex-col sm:flex-row gap-3 justify-between text-[12px] text-muted-foreground">
+          <span>© {new Date().getFullYear()} EDZUP — edzup.uk. All rights reserved.</span>
+          <span>Founded by Dharani K.K. (MBA) · Coimbatore</span>
         </div>
       </div>
     </footer>
   );
 }
 
-function FooterCol({ title, items }: { title: string; items: string[] }) {
+function FooterCol({ title, items }: { title: string; items: { l: string; h: string }[] }) {
   return (
     <div>
-      <h4 className="text-lg font-bold">{title}</h4>
-      <ul className="mt-5 space-y-3">
+      <h4 className="text-[15px] font-semibold">{title}</h4>
+      <ul className="mt-4 space-y-2.5 text-[13px]">
         {items.map((i) => (
-          <li key={i}><a href="#" className="text-muted-foreground hover:text-foreground">{i}</a></li>
+          <li key={i.l}><a href={i.h} className="text-muted-foreground hover:text-foreground transition">{i.l}</a></li>
         ))}
       </ul>
     </div>
