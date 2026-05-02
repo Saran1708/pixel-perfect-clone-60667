@@ -1,9 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle2, User, GraduationCap, Users as UsersIcon, ListChecks } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { FloatingContacts } from "@/components/site/FloatingContacts";
 import { useReveal } from "@/hooks/use-reveal";
 import { useLenis } from "@/hooks/use-lenis";
 
@@ -77,11 +76,20 @@ function EnquiryPage() {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<FormState>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
+  const formTopRef = useRef<HTMLDivElement>(null);
 
   // Scroll to top on mount
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
+
+  // Scroll to form top whenever step changes
+  useEffect(() => {
+    if (submitted) return;
+    const top = formTopRef.current?.getBoundingClientRect().top ?? 0;
+    const y = window.scrollY + top - 110;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }, [step, submitted]);
 
   // Load draft
   useEffect(() => {
@@ -131,16 +139,11 @@ function EnquiryPage() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="mx-auto max-w-3xl px-4 pt-32 pb-16 md:pt-36 md:pb-20">
-        <div className="mb-6">
-          <Link to="/" className="inline-flex items-center gap-2 text-[12px] font-medium text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="h-3.5 w-3.5" /> Back to home
-          </Link>
-        </div>
         {submitted ? (
           <SuccessCard onReset={handleReset} name={data.studentName} />
         ) : (
           <>
-            <div className="text-center animate-fade-up">
+            <div ref={formTopRef} className="text-center animate-fade-up scroll-mt-28">
               <p className="text-[12px] font-semibold uppercase tracking-wider text-accent2">Admission Enquiry</p>
               <h1 className="mt-2 text-3xl md:text-4xl font-bold text-brand">Tell us about you</h1>
               <p className="mt-3 text-[14px] text-muted-foreground">
@@ -247,7 +250,6 @@ function EnquiryPage() {
         )}
       </main>
       <Footer />
-      <FloatingContacts />
     </div>
   );
 }
