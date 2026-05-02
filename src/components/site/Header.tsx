@@ -1,10 +1,13 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Phone, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import logo from "@/assets/edzup-logo.png";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const onHome = location.pathname === "/";
+  const hashTo = (hash: string) => (onHome ? hash : `/${hash}`);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -24,11 +27,11 @@ export function Header() {
           <img src={logo} alt="EDZUP" className="h-8 w-auto" />
         </Link>
         <ul className={`hidden md:flex items-center gap-8 text-[13px] font-medium tracking-wide transition-colors ${scrolled ? "text-foreground/80" : "text-foreground/90"}`}>
-          <li><a href="#home" className="hover:text-brand transition">Home</a></li>
-          <li><a href="#about" className="hover:text-brand transition">About</a></li>
-          <li><a href="#services" className="hover:text-brand transition">Services</a></li>
-          <li><a href="#colleges" className="hover:text-brand transition">Colleges</a></li>
-          <li><a href="#contact" className="hover:text-brand transition">Contact</a></li>
+          <li><a href={hashTo("#home")} className="hover:text-brand transition">Home</a></li>
+          <li><a href={hashTo("#about")} className="hover:text-brand transition">About</a></li>
+          <li><a href={hashTo("#services")} className="hover:text-brand transition">Services</a></li>
+          <li><a href={hashTo("#colleges")} className="hover:text-brand transition">Colleges</a></li>
+          <li><a href={hashTo("#contact")} className="hover:text-brand transition">Contact</a></li>
         </ul>
         <div className="flex items-center gap-3">
           <a href="tel:9994538133" className={`hidden sm:flex items-center gap-1.5 text-[13px] font-medium transition-colors hover:text-brand ${scrolled ? "text-foreground/80" : "text-foreground/90"}`}>

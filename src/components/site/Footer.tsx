@@ -3,7 +3,7 @@ import logo from "@/assets/edzup-logo.png";
 
 export function Footer() {
   return (
-    <footer className="px-4 pb-10 pt-8">
+    <footer className="mt-10 bg-[oklch(0.97_0.012_250)] px-4 pb-10 pt-14 ring-1 ring-black/5">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
@@ -13,17 +13,17 @@ export function Footer() {
             </p>
           </div>
           <FooterCol title="Explore" items={[
-            { l: "Home", h: "#home" },
-            { l: "About", h: "#about" },
-            { l: "Services", h: "#services" },
-            { l: "Colleges", h: "#colleges" },
-            { l: "Contact", h: "#contact" },
+            { l: "Home", h: "/#home" },
+            { l: "About", h: "/#about" },
+            { l: "Services", h: "/#services" },
+            { l: "Colleges", h: "/#colleges" },
+            { l: "Contact", h: "/#contact" },
           ]} />
           <FooterCol title="Apply" items={[
             { l: "Admission Enquiry", h: "/enquiry" },
-            { l: "Engineering Colleges", h: "#colleges" },
-            { l: "Arts & Science", h: "#colleges" },
-            { l: "7.5% Category", h: "#services" },
+            { l: "Engineering Colleges", h: "/#colleges" },
+            { l: "Arts & Science", h: "/#colleges" },
+            { l: "7.5% Category", h: "/#services" },
           ]} />
           <div>
             <h4 className="text-[15px] font-semibold">Reach us</h4>

@@ -13,7 +13,6 @@ import { Trust } from "@/components/site/Trust";
 import { Faq } from "@/components/site/Faq";
 import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
-import { FloatingContacts } from "@/components/site/FloatingContacts";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -44,7 +43,6 @@ function Index() {
         <Contact />
       </main>
       <Footer />
-      <FloatingContacts />
     </div>
   );
 }
