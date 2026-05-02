@@ -3,7 +3,7 @@ import logo from "@/assets/edzup-logo.png";
 
 export function Footer() {
   return (
-    <footer className="px-4 pb-10 pt-8">
+    <footer className="mt-10 bg-[oklch(0.97_0.012_250)] px-4 pb-10 pt-14 ring-1 ring-black/5">
       <div className="mx-auto max-w-6xl">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
