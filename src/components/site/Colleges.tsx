@@ -1,4 +1,4 @@
-import { Building2, BookOpen } from "lucide-react";
+import { Building2, BookOpen, MapPin, Star } from "lucide-react";
 import collegesImg from "@/assets/edzup-colleges.jpg";
 
 const ENGINEERING = [
@@ -42,76 +42,103 @@ const ARTS = [
   "Maharaja Arts and Science College",
 ];
 
+import { useState } from "react";
+
+function CollegeChip({ name, kind }: { name: string; kind: "eng" | "arts" }) {
+  const initials = name
+    .replace(/[()&.]/g, "")
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((w) => w[0])
+    .join("")
+    .toUpperCase();
+  return (
+    <div className="reveal group flex items-center gap-3 rounded-2xl bg-white p-3.5 ring-1 ring-black/5 shadow-[0_4px_16px_-12px_rgba(0,0,0,0.18)] transition hover:-translate-y-0.5 hover:ring-brand/20 hover:shadow-[0_10px_28px_-14px_rgba(20,40,90,0.25)]">
+      <span
+        className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-[12px] font-bold ${
+          kind === "eng" ? "bg-brand/10 text-brand" : "bg-accent2/15 text-accent2"
+        }`}
+      >
+        {initials}
+      </span>
+      <div className="min-w-0">
+        <div className="truncate text-[13px] font-semibold text-foreground">{name}</div>
+        <div className="mt-0.5 flex items-center gap-1 text-[11px] text-muted-foreground">
+          <MapPin className="h-3 w-3" /> Coimbatore
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export function Colleges() {
-  const marquee = [...ENGINEERING, ...ARTS];
+  const [tab, setTab] = useState<"eng" | "arts">("eng");
+  const list = tab === "eng" ? ENGINEERING : ARTS;
+
   return (
     <section id="colleges" className="px-4 py-20 md:py-24">
       <div className="mx-auto max-w-6xl">
-        <div className="text-center reveal">
-          <p className="text-[12px] font-semibold uppercase tracking-wider text-accent2">Coimbatore</p>
-          <h2 className="mt-3 text-3xl md:text-5xl font-bold text-brand">Colleges we handle</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-[15px] text-muted-foreground">
-            Direct experience with every major engineering and arts &amp; science college in the region.
-          </p>
-        </div>
+        <div className="grid gap-10 md:grid-cols-2 md:items-center">
+          <div className="reveal">
+            <p className="text-[12px] font-semibold uppercase tracking-wider text-accent2">Our Network</p>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold text-brand leading-[1.05]">
+              Colleges we work with
+            </h2>
+            <p className="mt-4 max-w-md text-[15px] text-muted-foreground">
+              Direct relationships with every major engineering and arts &amp; science college in the region —
+              so you get accurate cut-offs, real seat availability and trusted guidance.
+            </p>
 
-        {/* Scrolling marquee */}
-        <div className="relative mt-10 overflow-hidden reveal">
-          <div className="absolute left-0 top-0 z-10 h-full w-20 bg-gradient-to-r from-background to-transparent" />
-          <div className="absolute right-0 top-0 z-10 h-full w-20 bg-gradient-to-l from-background to-transparent" />
-          <div className="flex w-max gap-3 animate-marquee">
-            {[...marquee, ...marquee].map((c, i) => (
-              <span key={i} className="rounded-full bg-white px-4 py-2 text-[12px] font-medium text-brand ring-1 ring-brand/10 shadow-sm whitespace-nowrap">
-                {c}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          <div className="md:col-span-1 overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-black/5 reveal">
-            <img src={collegesImg} alt="Colleges in Coimbatore" loading="lazy" width={1024} height={1024} className="w-full h-auto rounded-2xl" />
-            <div className="mt-5 grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-xl bg-brand/5 p-3">
+            <div className="mt-7 grid grid-cols-2 gap-3 max-w-sm">
+              <div className="rounded-2xl bg-white p-4 ring-1 ring-black/5 text-center">
                 <div className="text-2xl font-bold text-brand">{ENGINEERING.length}+</div>
                 <div className="text-[11px] text-muted-foreground">Engineering</div>
               </div>
-              <div className="rounded-xl bg-accent2/10 p-3">
+              <div className="rounded-2xl bg-white p-4 ring-1 ring-black/5 text-center">
                 <div className="text-2xl font-bold text-accent2">{ARTS.length}+</div>
                 <div className="text-[11px] text-muted-foreground">Arts &amp; Science</div>
               </div>
             </div>
           </div>
 
-          <div className="md:col-span-2 grid gap-6 sm:grid-cols-2">
-            <div className="reveal rounded-3xl bg-white p-6 ring-1 ring-black/5">
-              <div className="flex items-center gap-2 text-brand">
-                <Building2 className="h-4 w-4" />
-                <h3 className="text-base font-semibold">Engineering Colleges</h3>
-              </div>
-              <ul className="mt-4 space-y-2 text-[13px] text-muted-foreground">
-                {ENGINEERING.map((c) => (
-                  <li key={c} className="flex gap-2">
-                    <span className="mt-1.5 h-1 w-1 rounded-full bg-accent2 shrink-0" />
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="reveal rounded-3xl bg-white p-6 ring-1 ring-black/5">
-              <div className="flex items-center gap-2 text-brand">
-                <BookOpen className="h-4 w-4" />
-                <h3 className="text-base font-semibold">Arts &amp; Science Colleges</h3>
-              </div>
-              <ul className="mt-4 space-y-2 text-[13px] text-muted-foreground">
-                {ARTS.map((c) => (
-                  <li key={c} className="flex gap-2">
-                    <span className="mt-1.5 h-1 w-1 rounded-full bg-accent2 shrink-0" />
-                    {c}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="reveal overflow-hidden rounded-3xl ring-1 ring-black/5 shadow-[0_30px_60px_-30px_rgba(20,40,90,0.3)]">
+            <img src={collegesImg} alt="College campuses we work with" loading="lazy" width={1024} height={1024} className="h-full w-full object-cover" />
+          </div>
+        </div>
+
+        {/* Tabs */}
+        <div className="mt-14 flex items-center justify-center reveal">
+          <div className="inline-flex rounded-full bg-white p-1 ring-1 ring-black/5 shadow-sm">
+            <button
+              onClick={() => setTab("eng")}
+              className={`flex items-center gap-2 rounded-full px-5 py-2 text-[13px] font-semibold transition ${
+                tab === "eng" ? "bg-brand text-brand-foreground" : "text-foreground/70 hover:text-brand"
+              }`}
+            >
+              <Building2 className="h-3.5 w-3.5" /> Engineering ({ENGINEERING.length})
+            </button>
+            <button
+              onClick={() => setTab("arts")}
+              className={`flex items-center gap-2 rounded-full px-5 py-2 text-[13px] font-semibold transition ${
+                tab === "arts" ? "bg-accent2 text-accent2-foreground" : "text-foreground/70 hover:text-accent2"
+              }`}
+            >
+              <BookOpen className="h-3.5 w-3.5" /> Arts &amp; Science ({ARTS.length})
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {list.map((c) => (
+            <CollegeChip key={c} name={c} kind={tab} />
+          ))}
+        </div>
+
+        <div className="mt-10 flex justify-center reveal">
+          <div className="inline-flex items-center gap-2 rounded-full bg-brand/5 px-4 py-2 text-[12px] text-brand">
+            <Star className="h-3.5 w-3.5 fill-accent2 text-accent2" />
+            And many more across Coimbatore region — ask us about your preferred college.
           </div>
         </div>
       </div>

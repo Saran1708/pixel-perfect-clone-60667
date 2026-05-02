@@ -1,15 +1,29 @@
 import { Link } from "@tanstack/react-router";
 import { Phone, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import logo from "@/assets/edzup-logo.png";
 
 export function Header() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   return (
-    <header className="sticky top-0 z-50 px-4 pt-5">
-      <nav className="mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full bg-white/90 backdrop-blur px-3 py-2.5 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.12)] ring-1 ring-black/5">
+    <header className="fixed inset-x-0 top-0 z-50 px-4 pt-5">
+      <nav
+        className={`mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full px-3 py-2.5 transition-all duration-300 ring-1 ${
+          scrolled
+            ? "bg-white/90 backdrop-blur shadow-[0_8px_30px_-12px_rgba(0,0,0,0.12)] ring-black/5"
+            : "bg-white/10 backdrop-blur-md ring-white/20"
+        }`}
+      >
         <Link to="/" className="flex items-center gap-2 pl-2 shrink-0">
           <img src={logo} alt="EDZUP" className="h-8 w-auto" />
         </Link>
-        <ul className="hidden md:flex items-center gap-8 text-[13px] font-medium tracking-wide text-foreground/80">
+        <ul className={`hidden md:flex items-center gap-8 text-[13px] font-medium tracking-wide transition-colors ${scrolled ? "text-foreground/80" : "text-foreground/90"}`}>
           <li><a href="#home" className="hover:text-brand transition">Home</a></li>
           <li><a href="#about" className="hover:text-brand transition">About</a></li>
           <li><a href="#services" className="hover:text-brand transition">Services</a></li>
@@ -17,7 +31,7 @@ export function Header() {
           <li><a href="#contact" className="hover:text-brand transition">Contact</a></li>
         </ul>
         <div className="flex items-center gap-3">
-          <a href="tel:9994538133" className="hidden sm:flex items-center gap-1.5 text-[13px] font-medium text-foreground/80 hover:text-brand">
+          <a href="tel:9994538133" className={`hidden sm:flex items-center gap-1.5 text-[13px] font-medium transition-colors hover:text-brand ${scrolled ? "text-foreground/80" : "text-foreground/90"}`}>
             <Phone className="h-3.5 w-3.5" />
             9994538133
           </a>

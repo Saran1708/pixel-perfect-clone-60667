@@ -1,7 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { ArrowLeft, ArrowRight, CheckCircle2, Save, User, GraduationCap, Users as UsersIcon, ListChecks } from "lucide-react";
-import logo from "@/assets/edzup-logo.png";
+import { ArrowLeft, ArrowRight, CheckCircle2, User, GraduationCap, Users as UsersIcon, ListChecks } from "lucide-react";
+import { Header } from "@/components/site/Header";
+import { Footer } from "@/components/site/Footer";
+import { FloatingContacts } from "@/components/site/FloatingContacts";
+import { useReveal } from "@/hooks/use-reveal";
+import { useLenis } from "@/hooks/use-lenis";
 
 export const Route = createFileRoute("/enquiry")({
   head: () => ({
@@ -68,10 +72,11 @@ const LABELS: Record<keyof FormState, { label: string; type?: string; placeholde
 };
 
 function EnquiryPage() {
+  useLenis();
+  useReveal();
   const [step, setStep] = useState(1);
   const [data, setData] = useState<FormState>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
-  const [savedAt, setSavedAt] = useState<number | null>(null);
 
   // Scroll to top on mount
   useEffect(() => {
@@ -95,7 +100,6 @@ function EnquiryPage() {
     if (submitted) return;
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ data, step, ts: Date.now() }));
-      setSavedAt(Date.now());
     } catch {}
   }, [data, step, submitted]);
 
@@ -125,17 +129,13 @@ function EnquiryPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Mini header */}
-      <header className="sticky top-0 z-40 bg-background/85 backdrop-blur border-b border-black/5">
-        <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
-          <Link to="/" className="flex items-center gap-2 text-[13px] font-medium text-muted-foreground hover:text-foreground">
-            <ArrowLeft className="h-4 w-4" /> Back to home
+      <Header />
+      <main className="mx-auto max-w-3xl px-4 pt-32 pb-16 md:pt-36 md:pb-20">
+        <div className="mb-6">
+          <Link to="/" className="inline-flex items-center gap-2 text-[12px] font-medium text-muted-foreground hover:text-foreground">
+            <ArrowLeft className="h-3.5 w-3.5" /> Back to home
           </Link>
-          <img src={logo} alt="EDZUP" className="h-7 w-auto" />
         </div>
-      </header>
-
-      <main className="mx-auto max-w-3xl px-4 py-10 md:py-14">
         {submitted ? (
           <SuccessCard onReset={handleReset} name={data.studentName} />
         ) : (
@@ -144,7 +144,7 @@ function EnquiryPage() {
               <p className="text-[12px] font-semibold uppercase tracking-wider text-accent2">Admission Enquiry</p>
               <h1 className="mt-2 text-3xl md:text-4xl font-bold text-brand">Tell us about you</h1>
               <p className="mt-3 text-[14px] text-muted-foreground">
-                A short, step-by-step form. Your progress saves automatically — you can come back anytime.
+                A short, step-by-step form — takes about 3 minutes.
               </p>
             </div>
 
@@ -226,10 +226,6 @@ function EnquiryPage() {
                 >
                   <ArrowLeft className="h-3.5 w-3.5" /> Back
                 </button>
-                <div className="flex items-center gap-2 text-[11px] text-muted-foreground">
-                  <Save className="h-3 w-3" />
-                  {savedAt ? "Draft saved" : "Saving…"}
-                </div>
                 <button
                   type="button"
                   onClick={handleNext}
@@ -250,6 +246,8 @@ function EnquiryPage() {
           </>
         )}
       </main>
+      <Footer />
+      <FloatingContacts />
     </div>
   );
 }

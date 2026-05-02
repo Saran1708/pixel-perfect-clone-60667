@@ -20,7 +20,7 @@ export function Contact() {
               <div className="mt-7 space-y-3 text-[14px]">
                 <div className="flex items-center gap-3">
                   <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10"><User className="h-4 w-4" /></span>
-                  Dharani K.K. (MBA) — Founder
+                  Dharani K.K. — Founder
                 </div>
                 <a href="tel:9994538133" className="flex items-center gap-3 hover:text-accent2 transition">
                   <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10"><Phone className="h-4 w-4" /></span>
