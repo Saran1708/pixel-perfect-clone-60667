@@ -13,17 +13,17 @@ export function Footer() {
             </p>
           </div>
           <FooterCol title="Explore" items={[
-            { l: "Home", h: "#home" },
-            { l: "About", h: "#about" },
-            { l: "Services", h: "#services" },
-            { l: "Colleges", h: "#colleges" },
-            { l: "Contact", h: "#contact" },
+            { l: "Home", h: "/#home" },
+            { l: "About", h: "/#about" },
+            { l: "Services", h: "/#services" },
+            { l: "Colleges", h: "/#colleges" },
+            { l: "Contact", h: "/#contact" },
           ]} />
           <FooterCol title="Apply" items={[
             { l: "Admission Enquiry", h: "/enquiry" },
-            { l: "Engineering Colleges", h: "#colleges" },
-            { l: "Arts & Science", h: "#colleges" },
-            { l: "7.5% Category", h: "#services" },
+            { l: "Engineering Colleges", h: "/#colleges" },
+            { l: "Arts & Science", h: "/#colleges" },
+            { l: "7.5% Category", h: "/#services" },
           ]} />
           <div>
             <h4 className="text-[15px] font-semibold">Reach us</h4>
