@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/use-reveal";
-import { useLenis } from "@/hooks/use-lenis";
 import { Header } from "@/components/site/Header";
 import { Hero } from "@/components/site/Hero";
 import { About } from "@/components/site/About";
@@ -26,11 +25,10 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   useReveal();
-  useLenis();
   return (
     <div className="min-h-screen">
       <Header />
-      <main>
+      <main className="relative pointer-events-auto">
         <Hero />
         <About />
         <Services />

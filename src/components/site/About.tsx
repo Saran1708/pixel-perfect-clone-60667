@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import aboutImg from "@/assets/edzup-about.jpg";
+import aboutImg from "@/assets/about.png";
 
 export function About() {
   return (

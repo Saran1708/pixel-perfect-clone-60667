@@ -54,7 +54,7 @@ function CollegeChip({ name, kind }: { name: string; kind: "eng" | "arts" }) {
     .join("")
     .toUpperCase();
   return (
-    <div className="reveal group flex items-center gap-3 rounded-2xl bg-white p-3.5 ring-1 ring-black/5 shadow-[0_4px_16px_-12px_rgba(0,0,0,0.18)] transition hover:-translate-y-0.5 hover:ring-brand/20 hover:shadow-[0_10px_28px_-14px_rgba(20,40,90,0.25)]">
+    <div className="group flex items-center gap-3 rounded-2xl bg-white p-3.5 ring-1 ring-black/5 shadow-[0_4px_16px_-12px_rgba(0,0,0,0.18)] transition hover:-translate-y-0.5 hover:ring-brand/20 hover:shadow-[0_10px_28px_-14px_rgba(20,40,90,0.25)]">
       <span
         className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-[12px] font-bold ${
           kind === "eng" ? "bg-brand/10 text-brand" : "bg-accent2/15 text-accent2"

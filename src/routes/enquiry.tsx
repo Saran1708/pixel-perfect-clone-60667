@@ -4,7 +4,6 @@ import { ArrowLeft, ArrowRight, CheckCircle2, User, GraduationCap, Users as User
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { useReveal } from "@/hooks/use-reveal";
-import { useLenis } from "@/hooks/use-lenis";
 
 export const Route = createFileRoute("/enquiry")({
   head: () => ({
@@ -71,7 +70,6 @@ const LABELS: Record<keyof FormState, { label: string; type?: string; placeholde
 };
 
 function EnquiryPage() {
-  useLenis();
   useReveal();
   const [step, setStep] = useState(1);
   const [data, setData] = useState<FormState>(EMPTY);
@@ -100,15 +98,18 @@ function EnquiryPage() {
         if (parsed?.data) setData({ ...EMPTY, ...parsed.data });
         if (parsed?.step) setStep(parsed.step);
       }
-    } catch {}
+    } catch { }
   }, []);
 
-  // Save draft on every change
+  // Replace the "Save draft on every change" useEffect with this:
   useEffect(() => {
     if (submitted) return;
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ data, step, ts: Date.now() }));
-    } catch {}
+    const id = setTimeout(() => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ data, step, ts: Date.now() }));
+      } catch { }
+    }, 600);
+    return () => clearTimeout(id);
   }, [data, step, submitted]);
 
   const update = (k: keyof FormState, v: string) => setData((d) => ({ ...d, [k]: v }));
@@ -124,13 +125,13 @@ function EnquiryPage() {
   const handleSubmit = () => {
     // simulate submit; could be wired to backend later
     setSubmitted(true);
-    try { localStorage.removeItem(STORAGE_KEY); } catch {}
+    try { localStorage.removeItem(STORAGE_KEY); } catch { }
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleReset = () => {
     setData(EMPTY); setStep(1); setSubmitted(false);
-    try { localStorage.removeItem(STORAGE_KEY); } catch {}
+    try { localStorage.removeItem(STORAGE_KEY); } catch { }
   };
 
   const progress = ((step - 1) / SECTIONS.length) * 100;
@@ -138,7 +139,7 @@ function EnquiryPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="mx-auto max-w-3xl px-4 pt-32 pb-16 md:pt-36 md:pb-20">
+      <main className="relative mx-auto max-w-3xl px-4 pt-32 pb-16 md:pt-36 md:pb-20 pointer-events-auto">
         {submitted ? (
           <SuccessCard onReset={handleReset} name={data.studentName} />
         ) : (
@@ -181,7 +182,7 @@ function EnquiryPage() {
             </div>
 
             {/* Active section */}
-            <section key={step} className="mt-6 rounded-2xl bg-white p-6 md:p-8 ring-1 ring-black/5 shadow-sm animate-fade-up">
+            <section className="mt-6 rounded-2xl bg-white p-6 md:p-8 ring-1 ring-black/5 shadow-sm">
               <div className="flex items-center gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand/10 text-brand">
                   <currentSection.icon className="h-5 w-5" />
@@ -257,7 +258,7 @@ function EnquiryPage() {
 function SuccessCard({ onReset, name }: { onReset: () => void; name: string }) {
   return (
     <div className="mx-auto max-w-xl rounded-3xl bg-white p-10 text-center ring-1 ring-black/5 shadow-[0_30px_80px_-30px_rgba(20,40,90,0.25)] animate-fade-up">
-      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-accent2/15 text-accent2">
+      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-600">
         <CheckCircle2 className="h-8 w-8" />
       </div>
       <h2 className="mt-6 text-2xl md:text-3xl font-bold text-brand">Enquiry submitted successfully</h2>

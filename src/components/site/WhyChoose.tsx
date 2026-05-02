@@ -1,5 +1,5 @@
 import { HeartHandshake, ShieldCheck, MapPin, Award } from "lucide-react";
-import processImg from "@/assets/edzup-process.jpg";
+import processImg from "@/assets/whychoose.png";
 
 const LEFT = [
   { icon: HeartHandshake, title: "Genuine intent", text: "Started to help families who lack guidance — not for profit." },
