@@ -15,25 +15,22 @@ export const Route = createFileRoute("/enquiry")({
   component: EnquiryPage,
 });
 
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUtSXZt2Ny6QClYcBvsF6VhS6FazCOQoIp9nfhJKcpwtaxdhH9XW11HSMwVanw9EvLTw/exec";
 const STORAGE_KEY = "edzup_enquiry_draft_v1";
 
 type FormState = {
-  // Section 1
   studentName: string;
   dob: string;
   mobile: string;
   address: string;
-  // Section 2
   registerNo: string;
   totalMarks: string;
   subjects: string;
   marks11: string;
   marks10: string;
   lastSchool: string;
-  // Section 3
   community: string;
   subCaste: string;
-  // Section 4
   courseInterest: string;
   preferredCollege: string;
 };
@@ -74,14 +71,13 @@ function EnquiryPage() {
   const [step, setStep] = useState(1);
   const [data, setData] = useState<FormState>(EMPTY);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const formTopRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to top on mount
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
 
-  // Scroll to form top whenever step changes
   useEffect(() => {
     if (submitted) return;
     const top = formTopRef.current?.getBoundingClientRect().top ?? 0;
@@ -89,7 +85,6 @@ function EnquiryPage() {
     window.scrollTo({ top: y, behavior: "smooth" });
   }, [step, submitted]);
 
-  // Load draft
   useEffect(() => {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
@@ -101,7 +96,6 @@ function EnquiryPage() {
     } catch { }
   }, []);
 
-  // Replace the "Save draft on every change" useEffect with this:
   useEffect(() => {
     if (submitted) return;
     const id = setTimeout(() => {
@@ -122,11 +116,23 @@ function EnquiryPage() {
     else handleSubmit();
   };
 
-  const handleSubmit = () => {
-    // simulate submit; could be wired to backend later
-    setSubmitted(true);
-    try { localStorage.removeItem(STORAGE_KEY); } catch { }
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+    } catch (err) {
+      console.error("Submit error:", err);
+    } finally {
+      setSubmitting(false);
+      setSubmitted(true);
+      try { localStorage.removeItem(STORAGE_KEY); } catch { }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const handleReset = () => {
@@ -225,7 +231,7 @@ function EnquiryPage() {
                 <button
                   type="button"
                   onClick={() => setStep((s) => Math.max(1, s - 1))}
-                  disabled={step === 1}
+                  disabled={step === 1 || submitting}
                   className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white px-5 py-2.5 text-[13px] font-semibold text-foreground/80 disabled:opacity-40 hover:bg-muted transition"
                 >
                   <ArrowLeft className="h-3.5 w-3.5" /> Back
@@ -233,10 +239,10 @@ function EnquiryPage() {
                 <button
                   type="button"
                   onClick={handleNext}
-                  disabled={!isStepValid}
+                  disabled={!isStepValid || submitting}
                   className="group inline-flex items-center gap-2 rounded-full bg-brand py-2.5 pl-5 pr-1.5 text-[13px] font-semibold text-brand-foreground hover:bg-brand/90 disabled:opacity-40 disabled:cursor-not-allowed transition"
                 >
-                  {step === SECTIONS.length ? "Submit enquiry" : "Continue"}
+                  {submitting ? "Submitting..." : step === SECTIONS.length ? "Submit enquiry" : "Continue"}
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-accent2 text-accent2-foreground transition-transform group-hover:translate-x-0.5">
                     <ArrowRight className="h-3.5 w-3.5" />
                   </span>
