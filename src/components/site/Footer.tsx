@@ -36,7 +36,7 @@ export function Footer() {
         </div>
         <div className="mt-12 border-t pt-6 flex flex-col sm:flex-row gap-3 justify-between text-[12px] text-muted-foreground">
           <span>© {new Date().getFullYear()} EDZUP — edzup.uk. All rights reserved.</span>
-          <span>Founded by Dharani K.K. (MBA) · Coimbatore</span>
+          <span>Founded by Dharani K.K. · Coimbatore</span>
         </div>
       </div>
     </footer>

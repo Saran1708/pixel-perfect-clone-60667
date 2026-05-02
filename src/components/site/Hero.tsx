@@ -1,20 +1,20 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Sparkles, CalendarDays, ShieldCheck } from "lucide-react";
+import { ArrowRight, Sparkles, ShieldCheck, GraduationCap } from "lucide-react";
 import heroImg from "@/assets/edzup-hero.jpg";
 
 export function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden">
+    <section id="home" className="relative overflow-hidden pt-24 md:pt-28">
       <div className="absolute inset-0 bg-grid opacity-60" aria-hidden />
       {/* Soft brand blobs */}
       <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-[oklch(0.72_0.17_50/0.18)] blur-3xl animate-blob" aria-hidden />
       <div className="pointer-events-none absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-[oklch(0.32_0.09_260/0.18)] blur-3xl animate-blob [animation-delay:2s]" aria-hidden />
 
-      <div className="relative mx-auto max-w-6xl px-4 pt-16 pb-20 md:pt-24 md:pb-28">
+      <div className="relative mx-auto max-w-6xl px-4 pt-10 pb-20 md:pt-16 md:pb-28">
         <div className="grid items-center gap-10 md:grid-cols-2">
           <div className="animate-fade-up">
             <span className="inline-flex items-center gap-2 rounded-full bg-accent2/10 px-3 py-1 text-[11px] font-semibold tracking-wider text-accent2 uppercase">
-              <Sparkles className="h-3 w-3" /> Admission Alert 2026
+              <Sparkles className="h-3 w-3" /> Admissions Open
             </span>
             <h1 className="mt-5 text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.05] tracking-tight text-brand">
               Secure your future,<br />
@@ -48,7 +48,7 @@ export function Hero() {
 
             <div className="mt-8 flex flex-wrap gap-5 text-[13px] text-muted-foreground">
               <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-accent2" /> 100% Free</span>
-              <span className="inline-flex items-center gap-1.5"><CalendarDays className="h-4 w-4 text-accent2" /> +2 Results: May 8th</span>
+              <span className="inline-flex items-center gap-1.5"><GraduationCap className="h-4 w-4 text-accent2" /> All UG courses</span>
               <span className="inline-flex items-center gap-1.5"><Sparkles className="h-4 w-4 text-accent2" /> Coimbatore based</span>
             </div>
           </div>
@@ -72,30 +72,6 @@ export function Hero() {
                   <div className="text-[11px] text-muted-foreground">For every student</div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Important date banner */}
-        <div className="relative mt-12 overflow-hidden rounded-2xl bg-brand text-brand-foreground animate-fade-up [animation-delay:240ms]">
-          <div className="absolute inset-0 bg-grid-dark opacity-50" aria-hidden />
-          <div className="relative grid gap-4 px-6 py-5 md:grid-cols-3 md:items-center">
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent2 text-accent2-foreground">
-                <CalendarDays className="h-5 w-5" />
-              </span>
-              <div>
-                <div className="text-[11px] uppercase tracking-wider opacity-70">Important</div>
-                <div className="text-[15px] font-semibold">+2 Results on May 8th</div>
-              </div>
-            </div>
-            <div className="text-[13px] opacity-90 md:col-span-1">
-              மே 8 -ல் +2 ரிசல்ட்! Don't wait — make the correct decision <em>now</em>.
-            </div>
-            <div className="md:text-right">
-              <Link to="/enquiry" className="inline-flex items-center gap-2 rounded-full bg-accent2 px-5 py-2.5 text-[13px] font-semibold text-accent2-foreground hover:opacity-90 transition">
-                Reserve guidance <ArrowRight className="h-3.5 w-3.5" />
-              </Link>
             </div>
           </div>
         </div>
