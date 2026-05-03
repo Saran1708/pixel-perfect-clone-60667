@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Sparkles, ShieldCheck, GraduationCap } from "lucide-react";
-import heroImg from "@/assets/banner.png";
+import heroImg from "@/assets/edzup-hero.jpg";
 
 export function Hero() {
   return (
