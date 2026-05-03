@@ -1,13 +1,13 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import aboutImg from "@/assets/about.png";
+import aboutImg from "@/assets/edzup-about.jpg";
 
 export function About() {
   return (
     <section id="about" className="px-4 py-20 md:py-24">
       <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center">
         <div className="overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-black/5 reveal">
-          <img src={aboutImg} alt="About EDZUP" loading="lazy" width={1024} height={1024} className="h-full w-full object-contain" />
+          <img src={aboutImg} alt="Modern university library" loading="lazy" width={1024} height={1024} className="h-full w-full rounded-2xl object-cover" />
         </div>
         <div className="reveal">
           <p className="text-[12px] font-semibold uppercase tracking-wider text-accent2">About EDZUP</p>

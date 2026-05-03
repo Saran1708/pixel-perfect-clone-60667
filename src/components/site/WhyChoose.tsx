@@ -1,5 +1,5 @@
 import { HeartHandshake, ShieldCheck, MapPin, Award } from "lucide-react";
-import processImg from "@/assets/whychoose.png";
+import processImg from "@/assets/edzup-whychoose.jpg";
 
 const LEFT = [
   { icon: HeartHandshake, title: "Genuine intent", text: "Started to help families who lack guidance — not for profit." },
@@ -23,8 +23,8 @@ export function WhyChoose() {
           <div className="grid gap-5">
             {LEFT.map((f) => <FeatureCard key={f.title} {...f} />)}
           </div>
-          <div className="overflow-hidden rounded-3xl bg-white p-6 ring-1 ring-black/5 reveal">
-            <img src={processImg} alt="" loading="lazy" width={1024} height={1024} className="h-full w-full object-contain" />
+          <div className="overflow-hidden rounded-3xl ring-1 ring-black/5 reveal">
+            <img src={processImg} alt="Graduation cap and diplomas" loading="lazy" width={1024} height={1024} className="h-full w-full object-cover" />
           </div>
           <div className="grid gap-5">
             {RIGHT.map((f) => <FeatureCard key={f.title} {...f} />)}
