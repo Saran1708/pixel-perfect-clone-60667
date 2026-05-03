@@ -1,6 +1,4 @@
-import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-
-import appCss from "../styles.css?url";
+import { Outlet, Link, createRootRoute } from "@tanstack/react-router";
 
 function NotFoundComponent() {
   return (
@@ -25,53 +23,6 @@ function NotFoundComponent() {
 }
 
 export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "EDZUP — Free admission guidance, Coimbatore" },
-      { name: "description", content: "100% free college and course guidance for +2 students in Coimbatore. Engineering, Arts & Science, 7.5% category, loan support and more. Call 9994538133." },
-      { name: "author", content: "EDZUP" },
-      { property: "og:title", content: "EDZUP — Free admission guidance, Coimbatore" },
-      { property: "og:description", content: "100% free college and course guidance for +2 students in Coimbatore. Engineering, Arts & Science, 7.5% category, loan support and more. Call 9994538133." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "EDZUP — Free admission guidance, Coimbatore" },
-      { name: "twitter:description", content: "100% free college and course guidance for +2 students in Coimbatore. Engineering, Arts & Science, 7.5% category, loan support and more. Call 9994538133." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4b214046-7a27-4291-a356-8edb3c4257c8/id-preview-9121b843--0948d8aa-b2bf-425f-851f-9a86841d0742.lovable.app-1777637115849.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/4b214046-7a27-4291-a356-8edb3c4257c8/id-preview-9121b843--0948d8aa-b2bf-425f-851f-9a86841d0742.lovable.app-1777637115849.png" },
-    ],
-    links: [
-      { rel: "icon", type: "image/png", href: "/favicon.png" },
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" },
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
-    ],
-  }),
-  shellComponent: RootShell,
-  component: RootComponent,
+  component: () => <Outlet />,
   notFoundComponent: NotFoundComponent,
 });
-
-function RootShell({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
-
-function RootComponent() {
-  return <Outlet />;
-}

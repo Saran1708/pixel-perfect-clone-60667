@@ -6,12 +6,6 @@ import { Footer } from "@/components/site/Footer";
 import { useReveal } from "@/hooks/use-reveal";
 
 export const Route = createFileRoute("/enquiry")({
-  head: () => ({
-    meta: [
-      { title: "Admission Enquiry — EDZUP" },
-      { name: "description", content: "Apply for free admission guidance with EDZUP. Quick step-by-step enquiry form." },
-    ],
-  }),
   component: EnquiryPage,
 });
 

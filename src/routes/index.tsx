@@ -14,12 +14,6 @@ import { Contact } from "@/components/site/Contact";
 import { Footer } from "@/components/site/Footer";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "EDZUP — Free admission guidance for +2 students in Coimbatore" },
-      { name: "description", content: "EDZUP provides 100% free guidance to +2 students in Coimbatore for choosing the right Engineering or Arts & Science college. Call 9994538133." },
-    ],
-  }),
   component: Index,
 });
 
