@@ -9,7 +9,7 @@ export const Route = createFileRoute("/enquiry")({
   component: EnquiryPage,
 });
 
-const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwUtSXZt2Ny6QClYcBvsF6VhS6FazCOQoIp9nfhJKcpwtaxdhH9XW11HSMwVanw9EvLTw/exec";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzAnWbUAefY4PbZm_38_sBnk5FhUcAjv8L5bdwLgDX3EhJRY9SFXoTmeIiEg5b_8l67TQ/exec";
 const STORAGE_KEY = "edzup_enquiry_draft_v1";
 
 type FormState = {
@@ -20,7 +20,7 @@ type FormState = {
   registerNo: string;
   totalMarks: string;
   subjects: string;
-  marks11: string;
+  yearOfPassing: string;
   marks10: string;
   lastSchool: string;
   community: string;
@@ -31,14 +31,16 @@ type FormState = {
 
 const EMPTY: FormState = {
   studentName: "", dob: "", mobile: "", address: "",
-  registerNo: "", totalMarks: "", subjects: "", marks11: "", marks10: "", lastSchool: "",
+  registerNo: "", totalMarks: "", subjects: "", yearOfPassing: "", marks10: "", lastSchool: "",
   community: "", subCaste: "",
   courseInterest: "", preferredCollege: "",
 };
 
+const OPTIONAL_FIELDS = new Set<keyof FormState>(["registerNo", "subCaste", "totalMarks"]);
+
 const SECTIONS = [
   { id: 1, label: "Personal", icon: User, fields: ["studentName", "dob", "mobile", "address"] as (keyof FormState)[] },
-  { id: 2, label: "Academic", icon: GraduationCap, fields: ["registerNo", "totalMarks", "subjects", "marks11", "marks10", "lastSchool"] as (keyof FormState)[] },
+  { id: 2, label: "Academic", icon: GraduationCap, fields: ["registerNo", "totalMarks", "subjects", "yearOfPassing", "marks10", "lastSchool"] as (keyof FormState)[] },
   { id: 3, label: "Community", icon: UsersIcon, fields: ["community", "subCaste"] as (keyof FormState)[] },
   { id: 4, label: "Preference", icon: ListChecks, fields: ["courseInterest", "preferredCollege"] as (keyof FormState)[] },
 ];
@@ -48,14 +50,14 @@ const LABELS: Record<keyof FormState, { label: string; type?: string; placeholde
   dob: { label: "Date of Birth", type: "date" },
   mobile: { label: "Mobile Number", type: "tel", placeholder: "10-digit mobile" },
   address: { label: "Address", textarea: true, placeholder: "Door no, street, city, pincode" },
-  registerNo: { label: "+2 Register No.", placeholder: "Board register number" },
-  totalMarks: { label: "+2 Total Marks", placeholder: "e.g. 1145" },
+  registerNo: { label: "+2 Register No. (optional)", placeholder: "Board register number" },
+  totalMarks: { label: "+2 Total Marks (optional)", placeholder: "e.g. 1145" },
   subjects: { label: "+2 Subjects", placeholder: "e.g. Physics, Chemistry, Maths, Biology, English" },
-  marks11: { label: "11th Marks", placeholder: "Total / Percentage" },
+  yearOfPassing: { label: "+2 Year of Passing", placeholder: "e.g. 2024" },
   marks10: { label: "10th Marks", placeholder: "Total / Percentage" },
   lastSchool: { label: "Last Studied School", placeholder: "School name & place" },
   community: { label: "Community", placeholder: "OC / BC / MBC / SC / ST" },
-  subCaste: { label: "Sub-Caste", placeholder: "Sub-caste / community detail" },
+  subCaste: { label: "Sub-Caste (optional)", placeholder: "Sub-caste / community detail" },
   courseInterest: { label: "Course Interested In", placeholder: "e.g. B.E. CSE / B.Sc CS / B.Com" },
   preferredCollege: { label: "Preferred College", placeholder: "Top choice (you can change later)" },
 };
@@ -103,7 +105,9 @@ function EnquiryPage() {
   const update = (k: keyof FormState, v: string) => setData((d) => ({ ...d, [k]: v }));
 
   const currentSection = SECTIONS[step - 1];
-  const isStepValid = currentSection.fields.every((f) => data[f].trim().length > 0);
+  const isStepValid = currentSection.fields
+    .filter((f) => !OPTIONAL_FIELDS.has(f))
+    .every((f) => data[f].trim().length > 0);
 
   const handleNext = () => {
     if (step < SECTIONS.length) setStep(step + 1);
@@ -196,9 +200,12 @@ function EnquiryPage() {
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {currentSection.fields.map((f) => {
                   const meta = LABELS[f];
+                  const isOptional = OPTIONAL_FIELDS.has(f);
                   return (
                     <div key={f} className={meta.textarea ? "sm:col-span-2" : ""}>
-                      <label className="text-[12px] font-semibold text-foreground/80">{meta.label}</label>
+                      <label className="text-[12px] font-semibold text-foreground/80">
+                        {meta.label}
+                      </label>
                       {meta.textarea ? (
                         <textarea
                           rows={3}

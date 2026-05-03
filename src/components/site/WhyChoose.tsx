@@ -1,13 +1,15 @@
-import { HeartHandshake, ShieldCheck, MapPin, Award } from "lucide-react";
+import { HeartHandshake, ShieldCheck, MapPin, Award, Globe, GraduationCap } from "lucide-react";
 import processImg from "@/assets/edzup-whychoose.jpg";
 
 const LEFT = [
   { icon: HeartHandshake, title: "Genuine intent", text: "Started to help families who lack guidance — not for profit." },
   { icon: ShieldCheck, title: "100% free service", text: "No fees, no commissions, no hidden costs — ever." },
+  { icon: GraduationCap, title: "All streams supported", text: "Engineering, Medical, MBBS, Arts, Science, UG, PG, and abroad colleges." },
 ];
 const RIGHT = [
-  { icon: MapPin, title: "Local expertise", text: "Deep knowledge of every major Coimbatore institution." },
+  { icon: MapPin, title: "Tamil Nadu expertise", text: "In-depth knowledge of colleges and admission processes across Tamil Nadu." },
   { icon: Award, title: "Proven outcomes", text: "Students placed in top colleges every admission cycle." },
+  { icon: Globe, title: "Abroad college guidance", text: "Expert support for international education pathways and overseas admissions." },
 ];
 
 export function WhyChoose() {

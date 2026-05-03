@@ -3,9 +3,9 @@ import { Plus, Minus } from "lucide-react";
 
 const FAQS = [
   { q: "Is the service really free?", a: "Yes — completely free for every student. No fees, no commissions, no hidden charges. EDZUP exists to help families that lack guidance." },
-  { q: "Who can apply for guidance?", a: "Any +2 / Class 12 student in Tamil Nadu, especially Coimbatore region, who needs help choosing the right college and course." },
+  { q: "Who can apply for guidance?", a: "Any +2 / Class 12 student in Tamil Nadu who needs help choosing the right college and course." },
   { q: "When should I reach out?", a: "As early as possible — ideally before or right after your +2 results. Early action means better seats and better choices." },
-  { q: "Which colleges do you work with?", a: "All major Engineering and Arts & Science colleges in Coimbatore — PSG, CIT, Amrita, KCT, SKCET, GCT, KPR and many more." },
+  { q: "Which colleges do you work with?", a: "We have direct relationships with hundreds of colleges across Tamil Nadu — Engineering, Medical, MBBS, Arts & Science, and support for abroad colleges." },
   { q: "Do you help with 7.5% category?", a: "Yes — we provide complete support for 7.5% category choice filling along with management and government seat arrangements." },
   { q: "How do I get started?", a: "Fill the admission enquiry form on this site, or call/WhatsApp Dharani K.K. on 9994538133." },
 ];

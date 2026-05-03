@@ -2,8 +2,8 @@ import { ClipboardList, MessageSquare, GraduationCap, CheckCircle2 } from "lucid
 
 const STEPS = [
   { icon: ClipboardList, title: "Submit enquiry", text: "Fill the simple multi-step form with your details and preferences." },
-  { icon: MessageSquare, title: "Free counselling", text: "Our team reaches out personally to understand your goals." },
-  { icon: GraduationCap, title: "College & course plan", text: "We map out the best-fit colleges based on your marks and interest." },
+  { icon: MessageSquare, title: "Free counselling", text: "Our team reaches out personally to understand your goals and interests." },
+  { icon: GraduationCap, title: "College & course plan", text: "We map out the best-fit colleges (domestic & abroad) based on your marks and interest." },
   { icon: CheckCircle2, title: "Admission secured", text: "Choice filling, documentation and seat — handled together." },
 ];
 

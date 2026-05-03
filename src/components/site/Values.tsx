@@ -10,7 +10,7 @@ export function Values() {
           </span>
           <h3 className="mt-6 text-xl font-semibold">Our Mission</h3>
           <p className="mt-3 text-[14px] opacity-85 leading-relaxed">
-            To make sure no student in Coimbatore picks the wrong college simply because they didn't have someone to guide them.
+            To make sure no student in Tamil Nadu picks the wrong college simply because they didn't have someone to guide them.
           </p>
         </div>
         <div className="reveal rounded-3xl bg-white p-7 ring-1 ring-black/5">

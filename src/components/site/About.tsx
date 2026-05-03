@@ -15,7 +15,7 @@ export function About() {
             Genuine, free guidance — because the right course shapes a lifetime.
           </h2>
           <p className="mt-5 text-[15px] text-muted-foreground leading-relaxed">
-            EDZUP is a Coimbatore-based educational consultancy founded to provide free, honest counselling
+            EDZUP is an educational consultancy founded to provide free, honest counselling to +2 students across Tamil Nadu for college and course selection.
             to students and families who lack access to quality academic guidance. We saw too many students —
             especially from uneducated families, single-parent homes, or financially weak backgrounds — choosing
             the wrong courses and wasting their futures. EDZUP exists to change that.
@@ -34,8 +34,8 @@ export function About() {
               <p className="mt-1.5 text-[12px] text-muted-foreground">Free for all students</p>
             </div>
             <div>
-              <div className="text-2xl md:text-3xl font-bold text-brand">35+</div>
-              <p className="mt-1.5 text-[12px] text-muted-foreground">Top Coimbatore colleges</p>
+              <div className="text-2xl md:text-3xl font-bold text-brand">150+</div>
+              <p className="mt-1.5 text-[12px] text-muted-foreground">Top colleges</p>
             </div>
             <div>
               <div className="text-2xl md:text-3xl font-bold text-brand">7.5</div>

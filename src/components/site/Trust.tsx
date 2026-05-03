@@ -4,14 +4,14 @@ const STATS = [
   { icon: Users, num: "500+", label: "Students guided" },
   { icon: ShieldCheck, num: "100%", label: "Free, always" },
   { icon: Star, num: "4.9", label: "Avg. parent rating" },
-  { icon: Heart, num: "35+", label: "Partner colleges" },
+  { icon: Heart, num: "50+", label: "Partner colleges" },
 ];
 
 const TESTIMONIALS = [
   {
     name: "Priya R.",
-    role: "Parent, Coimbatore",
-    text: "Dharani sir helped us pick the right Engineering college within our budget. Honest advice — never asked for money.",
+    role: "Parent, Tamil Nadu",
+    text: "Dharani Mam helped us pick the right college within our budget. Honest advice — never asked for money.",
   },
   {
     name: "Karthik S.",
@@ -33,7 +33,7 @@ export function Trust() {
           <p className="text-[12px] font-semibold uppercase tracking-wider text-accent2">Trusted by families</p>
           <h2 className="mt-3 text-3xl md:text-5xl font-bold text-brand">Real stories. Real outcomes.</h2>
           <p className="mx-auto mt-4 max-w-2xl text-[15px] text-muted-foreground">
-            Hundreds of students across Coimbatore have walked into the right college with EDZUP — at zero cost.
+            Hundreds of students across Tamil Nadu have walked into the right college with EDZUP — at zero cost.
           </p>
         </div>
 

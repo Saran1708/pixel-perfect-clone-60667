@@ -9,7 +9,7 @@ export function Footer() {
           <div>
             <img src={logo} alt="EDZUP" className="h-9 w-auto" />
             <p className="mt-4 text-[13px] text-muted-foreground max-w-xs leading-relaxed">
-              Coimbatore-based educational consultancy providing 100% free guidance to +2 students for college and course selection.
+              Tamil Nadu-based educational consultancy providing 100% free guidance to +2 students for college and course selection.
             </p>
           </div>
           <FooterCol title="Explore" items={[
@@ -36,7 +36,7 @@ export function Footer() {
         </div>
         <div className="mt-12 border-t pt-6 flex flex-col sm:flex-row gap-3 justify-between text-[12px] text-muted-foreground">
           <span>© {new Date().getFullYear()} EDZUP — edzup.uk. All rights reserved.</span>
-          <span>Founded by Dharani K.K. · Coimbatore</span>
+          <span>Founded by Dharani K.K. · Tamil Nadu</span>
         </div>
       </div>
     </footer>

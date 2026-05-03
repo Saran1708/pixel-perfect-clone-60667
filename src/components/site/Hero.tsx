@@ -21,9 +21,9 @@ export function Hero() {
               <span className="text-foreground">make the right call.</span>
             </h1>
             <p className="mt-5 max-w-xl text-base text-muted-foreground leading-relaxed">
-              EDZUP gives <strong className="text-foreground font-semibold">+2 students</strong> in Coimbatore completely
+              EDZUP gives <strong className="text-foreground font-semibold">+2 students</strong> across Tamil Nadu completely
               <strong className="text-accent2 font-semibold"> FREE </strong>
-              guidance to choose the right college and course — Engineering, Arts &amp; Science, and all UG programs.
+              guidance to choose the right college and course — Engineering, Medical, Arts &amp; Science and abroad colleges.
             </p>
 
             <div className="mt-7 flex flex-wrap items-center gap-3">
@@ -48,8 +48,8 @@ export function Hero() {
 
             <div className="mt-8 flex flex-wrap gap-5 text-[13px] text-muted-foreground">
               <span className="inline-flex items-center gap-1.5"><ShieldCheck className="h-4 w-4 text-accent2" /> 100% Free</span>
-              <span className="inline-flex items-center gap-1.5"><GraduationCap className="h-4 w-4 text-accent2" /> All UG courses</span>
-              <span className="inline-flex items-center gap-1.5"><Sparkles className="h-4 w-4 text-accent2" /> Coimbatore based</span>
+              <span className="inline-flex items-center gap-1.5"><GraduationCap className="h-4 w-4 text-accent2" /> All UG and PG courses</span>
+              <span className="inline-flex items-center gap-1.5"><Sparkles className="h-4 w-4 text-accent2" /> Tamil Nadu wide</span>
             </div>
           </div>
 
@@ -58,10 +58,10 @@ export function Hero() {
               <img src={heroImg} alt="EDZUP — guidance for higher education" width={1280} height={960} className="w-full h-auto rounded-2xl" />
               {/* Floating chip 1 */}
               <div className="absolute -left-4 top-8 hidden sm:flex items-center gap-3 rounded-2xl bg-white px-4 py-3 shadow-xl ring-1 ring-black/5 animate-float-slow">
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-brand-foreground text-sm font-bold">35+</span>
+                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-brand-foreground text-sm font-bold">50+</span>
                 <div className="leading-tight">
                   <div className="text-[13px] font-semibold">Top Colleges</div>
-                  <div className="text-[11px] text-muted-foreground">Coimbatore region</div>
+                  <div className="text-[11px] text-muted-foreground">Tamil Nadu wide</div>
                 </div>
               </div>
               {/* Floating chip 2 */}

@@ -1,8 +1,9 @@
 import { GraduationCap, Compass, Wallet, BarChart3, ShieldCheck, ListChecks, Building2 } from "lucide-react";
 
 const SERVICES = [
-  { icon: GraduationCap, title: "College selection", text: "Help choosing colleges for Arts, Engineering & all UG courses." },
+  { icon: GraduationCap, title: "College selection", text: "Help choosing colleges for Engineering, Medical, MBBS, Arts, Science & all UG, PG courses." },
   { icon: Compass, title: "Career guidance", text: "Honest direction based on your interests, marks and goals." },
+  { icon: GraduationCap, title: "Abroad colleges guidance", text: "Expert assistance for international education pathways and overseas college admissions." },
   { icon: Wallet, title: "Loan process support", text: "Step-by-step guidance through education loan applications." },
   { icon: BarChart3, title: "Cut-off explanation", text: "Understand cut-offs and where you really stand." },
   { icon: ShieldCheck, title: "FREE engineering seats", text: "Assistance securing free engineering seat opportunities." },
