@@ -38,6 +38,43 @@ const EMPTY: FormState = {
 
 const OPTIONAL_FIELDS = new Set<keyof FormState>(["registerNo", "subCaste", "totalMarks"]);
 
+const DROPDOWN_FIELDS = new Set<keyof FormState>(["subjects", "community"]);
+
+const SUBJECT_OPTIONS = [
+  // Group 1 – Engineering / Computer Science / Maths Focus
+  { group: "Group 1 – Engineering / Computer Science / Maths", value: "Physics + Chemistry + Mathematics + Computer Science" },
+  { group: "Group 1 – Engineering / Computer Science / Maths", value: "Physics + Chemistry + Mathematics + Biology (Bio-Maths)" },
+  { group: "Group 1 – Engineering / Computer Science / Maths", value: "Physics + Chemistry + Mathematics + Statistics" },
+  { group: "Group 1 – Engineering / Computer Science / Maths", value: "Physics + Chemistry + Mathematics + Biochemistry" },
+  { group: "Group 1 – Engineering / Computer Science / Maths", value: "Physics + Chemistry + Mathematics + Communicative English" },
+  { group: "Group 1 – Engineering / Computer Science / Maths", value: "Physics + Chemistry + Mathematics + Home Science" },
+  // Group 2 – Medical / Biology Focus
+  { group: "Group 2 – Medical / Biology Focus", value: "Physics + Chemistry + Biology + Computer Science" },
+  { group: "Group 2 – Medical / Biology Focus", value: "Physics + Chemistry + Biology + Micro Biology" },
+  { group: "Group 2 – Medical / Biology Focus", value: "Physics + Chemistry + Biology + Biochemistry" },
+  { group: "Group 2 – Medical / Biology Focus", value: "Physics + Chemistry + Biology + Nursing" },
+  { group: "Group 2 – Medical / Biology Focus", value: "Physics + Chemistry + Biology + Nutrition & Dietetics" },
+  { group: "Group 2 – Medical / Biology Focus", value: "Physics + Chemistry + Biology + Home Science" },
+  { group: "Group 2 – Medical / Biology Focus", value: "Physics + Chemistry + Botany + Zoology" },
+  // Group 3 – Commerce / Business Focus
+  { group: "Group 3 – Commerce / Business Focus", value: "Commerce + Accountancy + Economics + Business Maths" },
+  { group: "Group 3 – Commerce / Business Focus", value: "Commerce + Accountancy + Economics + Computer Applications" },
+  { group: "Group 3 – Commerce / Business Focus", value: "Commerce + Accountancy + Economics + Statistics" },
+  { group: "Group 3 – Commerce / Business Focus", value: "Commerce + Accountancy + Economics + Commercial Geography" },
+  { group: "Group 3 – Commerce / Business Focus", value: "Commerce + Accountancy + Economics + Office Management" },
+  { group: "Group 3 – Commerce / Business Focus", value: "Commerce + Accountancy + Economics + History" },
+  // Group 4 – Arts / Humanities Focus
+  { group: "Group 4 – Arts / Humanities Focus", value: "History + Geography + Political Science + Economics" },
+  { group: "Group 4 – Arts / Humanities Focus", value: "History + Economics + Commerce" },
+  { group: "Group 4 – Arts / Humanities Focus", value: "Sociology + Psychology + Economics" },
+  { group: "Group 4 – Arts / Humanities Focus", value: "Political Science + History + Geography" },
+  { group: "Group 4 – Arts / Humanities Focus", value: "Tamil + English + History + Economics" },
+  { group: "Group 4 – Arts / Humanities Focus", value: "Home Science + Nutrition + Family Resource Management" },
+  { group: "Others", value: "Others" },
+];
+
+const COMMUNITY_OPTIONS = ["OC", "FC", "BC", "BCM", "MBC", "DNC", "DC", "SC", "SCA", "ST", "Others"];
+
 const SECTIONS = [
   { id: 1, label: "Personal", icon: User, fields: ["studentName", "dob", "mobile", "address"] as (keyof FormState)[] },
   { id: 2, label: "Academic", icon: GraduationCap, fields: ["registerNo", "totalMarks", "subjects", "yearOfPassing", "marks10", "lastSchool"] as (keyof FormState)[] },
@@ -52,15 +89,18 @@ const LABELS: Record<keyof FormState, { label: string; type?: string; placeholde
   address: { label: "Address", textarea: true, placeholder: "Door no, street, city, pincode" },
   registerNo: { label: "+2 Register No. (optional)", placeholder: "Board register number" },
   totalMarks: { label: "+2 Total Marks (optional)", placeholder: "e.g. 1145" },
-  subjects: { label: "+2 Subjects", placeholder: "e.g. Physics, Chemistry, Maths, Biology, English" },
+  subjects: { label: "+2 Subject Group", placeholder: "Select your subject group" },
   yearOfPassing: { label: "+2 Year of Passing", placeholder: "e.g. 2024" },
   marks10: { label: "10th Marks", placeholder: "Total / Percentage" },
   lastSchool: { label: "Last Studied School", placeholder: "School name & place" },
-  community: { label: "Community", placeholder: "OC / BC / MBC / SC / ST" },
+  community: { label: "Community", placeholder: "Select community" },
   subCaste: { label: "Sub-Caste (optional)", placeholder: "Sub-caste / community detail" },
   courseInterest: { label: "Course Interested In", placeholder: "e.g. B.E. CSE / B.Sc CS / B.Com" },
   preferredCollege: { label: "Preferred College", placeholder: "Top choice (you can change later)" },
 };
+
+const selectClass = "mt-1.5 w-full rounded-xl border border-black/10 bg-background px-4 py-2.5 text-[14px] outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/15 appearance-none cursor-pointer";
+const inputClass = "mt-1.5 w-full rounded-xl border border-black/10 bg-background px-4 py-2.5 text-[14px] outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/15";
 
 function EnquiryPage() {
   useReveal();
@@ -200,19 +240,58 @@ function EnquiryPage() {
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {currentSection.fields.map((f) => {
                   const meta = LABELS[f];
-                  const isOptional = OPTIONAL_FIELDS.has(f);
+                  const isDropdown = DROPDOWN_FIELDS.has(f);
+
                   return (
-                    <div key={f} className={meta.textarea ? "sm:col-span-2" : ""}>
+                    <div key={f} className={meta.textarea || f === "subjects" ? "sm:col-span-2" : ""}>
                       <label className="text-[12px] font-semibold text-foreground/80">
                         {meta.label}
                       </label>
-                      {meta.textarea ? (
+
+                      {/* Subjects dropdown — grouped by category */}
+                      {f === "subjects" ? (
+                        <div className="relative">
+                          <select
+                            value={data[f]}
+                            onChange={(e) => update(f, e.target.value)}
+                            className={selectClass}
+                          >
+                            <option value="">— Select subject group —</option>
+                            {(() => {
+                              const groups = [...new Set(SUBJECT_OPTIONS.map((o) => o.group))];
+                              return groups.map((g) => (
+                                <optgroup key={g} label={g}>
+                                  {SUBJECT_OPTIONS.filter((o) => o.group === g).map((o) => (
+                                    <option key={o.value} value={o.value}>{o.value}</option>
+                                  ))}
+                                </optgroup>
+                              ));
+                            })()}
+                          </select>
+                          <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground text-[10px]">▼</span>
+                        </div>
+                      ) : f === "community" ? (
+                        /* Community dropdown */
+                        <div className="relative">
+                          <select
+                            value={data[f]}
+                            onChange={(e) => update(f, e.target.value)}
+                            className={selectClass}
+                          >
+                            <option value="">— Select community —</option>
+                            {COMMUNITY_OPTIONS.map((c) => (
+                              <option key={c} value={c}>{c}</option>
+                            ))}
+                          </select>
+                          <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground text-[10px]">▼</span>
+                        </div>
+                      ) : meta.textarea ? (
                         <textarea
                           rows={3}
                           value={data[f]}
                           onChange={(e) => update(f, e.target.value)}
                           placeholder={meta.placeholder}
-                          className="mt-1.5 w-full rounded-xl border border-black/10 bg-background px-4 py-2.5 text-[14px] outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/15"
+                          className={inputClass}
                         />
                       ) : (
                         <input
@@ -220,7 +299,7 @@ function EnquiryPage() {
                           value={data[f]}
                           onChange={(e) => update(f, e.target.value)}
                           placeholder={meta.placeholder}
-                          className="mt-1.5 w-full rounded-xl border border-black/10 bg-background px-4 py-2.5 text-[14px] outline-none transition focus:border-brand focus:ring-2 focus:ring-brand/15"
+                          className={inputClass}
                         />
                       )}
                     </div>
